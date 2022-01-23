@@ -1,8 +1,8 @@
 <script>
     import { Reddit, Facebook, Line, Twitter } from 'svelte-share-buttons-component';
 
-    const url = 'https://quotes.vvx.bar/';
-    const title = 'Awesome Quotes';
+    const url = 'https://toGamer.vvx.bar/';
+    const title = 'toGamer';
 </script>
 
 <div class="absolute bottom-0 right-0 p-3 flex flex-row gap-2">
