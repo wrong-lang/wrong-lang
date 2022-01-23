@@ -1,31 +1,26 @@
 <script>
-    import { quotes } from '$lib/quotes';
+    import { toGamer } from '$lib/toGamer';
+    import { writable } from 'svelte/store';
 
-    export let quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-    export let random = () => {
-        quote = quotes[Math.floor(Math.random() * quotes.length)];
-    }
+    let input = writable('กายดี้เทพซ่า');
+    let result = toGamer($input);
+    
+    input.subscribe(value => {
+        input.set(value);
+        result = toGamer(value);
+    });
 </script>
 
 <div class="grid h-screen place-items-center">
     <div>
         <div class="flex flex-col justify-center gap-6">
             <p class="md:text-8xl text-6xl m-4 text-center font-bold animate-bounce">
-                Awesome Quotes
+                🎮toGamer
             </p>
-            <div class="text-3xl text-center flex-none animate-pop">
-                <span class="before:block before:absolute before:-inset-4 before:bg-blue-500 before:-skew-y-2 relative inline-block">
-                <span class="relative text-white">
-                    {quote}
-                </span>
-            </span>
+            <div class="flex flex-col gap-4">
+              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$input}>
+              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={result}>
             </div>
-            <center>
-                <button on:click={() => random()} class="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-sm mt-8 hover:bg-blue-600 active:scale-90 duration-200">
-                    Random
-                </button>
-            </center>
         </div>
     </div>
 </div>
