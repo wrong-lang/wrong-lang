@@ -7,6 +7,7 @@
     let result = writable('');
     let thLayout = writable('Kedmanee')
     let enLayout = writable('Qwerty')
+    let mode = writable('decrypt')
     
     input.subscribe(value => {
         input.set(value);
@@ -20,12 +21,29 @@
     
     thLayout.subscribe(value => {
         thLayout.set(value);
+      if($mode === 'decrypt') {
         result.set(wrongLang($input, value, $enLayout));
+      } else {
+        input.set(correctLang($result, value, $enLayout));
+      }
     });
 
     enLayout.subscribe(value => {
       enLayout.set(value);
-      input.set(correctLang($result, $thLayout, value));
+      if($mode === 'decrypt') {
+        result.set(wrongLang($input, $thLayout, value));
+      } else {
+        input.set(correctLang($result, $thLayout, value));
+      }
+    });
+    
+    mode.subscribe(value => {
+      mode.set(value);
+      if(value === 'decrypt') {
+        result.set(wrongLang($input, $thLayout, $enLayout));
+      } else {
+        input.set(correctLang($result, $thLayout, $enLayout));
+      }
     });
 </script>
 
@@ -39,7 +57,7 @@
               <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$input}>
               <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$result}>
             </div>
-          <div class="grid md:grid-cols-1 grid-cols-2 gap-3">
+          <div class="grid md:grid-cols-1 grid-cols-3 gap-3">
             <div class="flex md:flex-row flex-col gap-4 justify-center items-center">
               <p>Thai Layout: </p>
               <button class="{$thLayout === 'Kedmanee'   ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white" on:click={() => $thLayout = 'Kedmanee'}>Kedmanee</button>
@@ -52,6 +70,12 @@
             <button class="{$enLayout === 'Dvorak' ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white" on:click={() => $enLayout = 'Dvorak'}>Dvorak</button>
             <button class="{$enLayout === 'Colemak' ? 'bg-green-500': 'bg-blue-500'} px-4 py-2 rounded-lg text-white" on:click={() => $enLayout = 'Colemak'}>Colemak</button>
           </div>
+            <div class="flex md:flex-row flex-col gap-4 justify-center items-center">
+              <p>Mode: </p>
+              <button class="{$mode === 'decrypt' ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white" on:click={() => $mode = 'decrypt'}>Decrypt</button>
+              <button class="{$mode === 'encrypt' ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white" on:click={() => $mode = 'encrypt'}>Encrypt</button>
+            </div>
+
           </div>
         </div>
     </div>
