@@ -54,8 +54,8 @@
                 ⌨wrongLang
             </p>
             <div class="flex flex-col gap-4">
-              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$input}>
-              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$result}>
+              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$input} placeholder="English goes here...">
+              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$result} placeholder="Thai goes here...">
             </div>
           <div class="grid md:grid-cols-1 grid-cols-3 gap-3">
             <div class="flex md:flex-row flex-col gap-4 items-center">
