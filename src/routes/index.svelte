@@ -80,3 +80,9 @@
         </div>
     </div>
 </div>
+<div class="absolute top-0 left-0 p-2 text-gray-500">
+  By <a href="https://github.com/tinvv">Tinnaphat Somsang (@tinvv)</a>
+</div>
+<div class="absolute top-0 right-0 p-2 text-gray-500">
+  <a href="https://github.com/tinvv/wrong-lang">Github</a>
+</div>
