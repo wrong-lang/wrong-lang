@@ -1,3 +1,3 @@
-# toGamer
+# Wrong-lang
 
-llปaJo^กษs1ne1ห้!ป็uo^กษs!กม!มos์
+ l;ylfu8iy[mjkol,k=bd=,i,8o.=h ;jv'c]j' 
