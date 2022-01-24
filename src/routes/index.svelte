@@ -11,12 +11,16 @@
     
     input.subscribe(value => {
         input.set(value);
+      if($mode === 'decrypt') {
         result.set(wrongLang(value, $thLayout, $enLayout));
+      }
     });
-    
+
     result.subscribe(value => {
         result.set(value);
+      if($mode === 'encrypt') {
         input.set(correctLang(value, $thLayout, $enLayout));
+      }
     });
     
     thLayout.subscribe(value => {

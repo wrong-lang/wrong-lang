@@ -8,6 +8,9 @@ export function wrongLang(input, thmode, enmode) {
   let engQwerty = "1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?".split('')
   let engDvorak = "1234567890[]',.pyfgcrl/=\\aoeuidhtns-;qjkxbmwvz!@#$%^&*(){}\"<>PYFGCRL?+|AOEUIDHTNS_:QJKXBMWVZ".split('')
   let engColemak = "1234567890-=qwfpgjluy;[]\\arstdhneio'zxcvbkm,./!@#$%^&*()_+QWFGPJLUY:{}|ARSTDHNEIO\"ZXCVBKM<>?".split('')
-
-  return input.split('').map(char => (thmode === 'Manoonchai' ? thaiManoonchai : thmode === 'Pattachote' ? thaiPattachote : thaiKedmanee)[(enmode === 'Colemak' ? engColemak : enmode === 'Dvorak' ? engDvorak : engQwerty).indexOf(char)]).map(char => char || ' ').join('')
+  
+  let thLayout = (thmode === 'Manoonchai' ? thaiManoonchai : thmode === 'Pattachote' ? thaiPattachote : thaiKedmanee);
+  let enLayout = (enmode === 'Colemak' ? engColemak : enmode === 'Dvorak' ? engDvorak : engQwerty);
+  
+  return input.split('').map(char => enLayout.indexOf(char) !== -1 ? thLayout[enLayout.indexOf(char)] : char).join('')
 }
