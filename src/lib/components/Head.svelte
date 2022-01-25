@@ -10,5 +10,6 @@
     <meta name="og:description" content={content}>
     <meta name="og:image" content="https://raw.githubusercontent.com/tinvv/timelapse/main/projects/wrong-lang_home.png">
     <meta name="og:type" content="website">
+    <meta name="keywords" content="ไทย, อังกฤษ, พิมพ์ผิด, ลืม, เปลี่ยนภาษา">
     <title>{title}</title>
 </head>
