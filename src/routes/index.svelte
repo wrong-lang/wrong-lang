@@ -4,6 +4,7 @@
     import { writable } from 'svelte/store';
     import Modal from '$lib/components/Modal.svelte';
     import { modal, darkTheme } from '$lib/store';
+    import { unshift } from "$lib/unshift.js";
 
     let input = writable('l;ylfu8iy[');
     let result = writable('');
@@ -15,6 +16,8 @@
         input.set(value);
       if($mode === 'decrypt') {
         result.set(wrongLang(value, $thLayout, $enLayout));
+      } else if ($mode === 'unshift') {
+        result.set(unshift(value, $thLayout));
       }
     });
 
@@ -29,8 +32,10 @@
         thLayout.set(value);
       if($mode === 'decrypt') {
         result.set(wrongLang($input, value, $enLayout));
-      } else {
+      } else if ($mode === 'encrypt') {
         input.set(correctLang($result, value, $enLayout));
+      } else {
+        result.set(unshift($input, value));
       }
     });
 
@@ -47,8 +52,10 @@
       mode.set(value);
       if(value === 'decrypt') {
         result.set(wrongLang($input, $thLayout, $enLayout));
-      } else {
+      } else if(value === 'encrypt') {
         input.set(correctLang($result, $thLayout, $enLayout));
+      } else {
+        result.set(unshift($input, $thLayout));
       }
     });
 </script>
@@ -60,8 +67,8 @@
                 <p class="animate-bounce inline-block text-black dark:text-white">⌨wrongLang</p> <p class="inline-block text-2xl text-gray-500 cursor-pointer animate-spin" on:click={() => $modal = true}>?</p>
               </div>
             <div class="flex flex-col gap-4">
-              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$input} placeholder="English goes here...">
-              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$result} placeholder="Thai goes here...">
+              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$input} placeholder="{$mode === 'unshift' ? 'Shift text goes here...' : $mode === 'decrypt' ? 'English goes here...' : 'Result goes here...'}">
+              <input type="text" class="border border-gray-500 rounded-lg p-3" bind:value={$result} placeholder="{$mode === 'encrypt' ? 'Thai goes here...' : 'Result goes here...'}">
             </div>
           <div class="grid md:grid-cols-2 grid-cols-3 gap-3">
             <p class="md:block hidden text-black dark:text-white">Thai Layout: </p>
@@ -83,6 +90,7 @@
               <p class="md:hidden block text-black dark:text-white">Mode: </p>
               <button class="{$mode === 'decrypt' ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white w-32" on:click={() => $mode = 'decrypt'}>Decrypt</button>
               <button class="{$mode === 'encrypt' ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white w-32" on:click={() => $mode = 'encrypt'}>Encrypt</button>
+              <button class="{$mode === 'unshift' ? 'bg-green-500' : 'bg-blue-500'} px-4 py-2 rounded-lg text-white w-32" on:click={() => $mode = 'unshift'}>Unshift</button>
             </div>
 
           </div>
@@ -93,7 +101,9 @@
   <a on:click={() => $darkTheme = !($darkTheme)} class="cursor-pointer">{$darkTheme ? '🌞' : '🌙' }</a>
 </div>
 <div class="absolute top-0 right-0 p-2 text-gray-500">
-  <a href="https://github.com/tinvv/wrong-lang">Github</a>
+  <a href="https://github.com/tinvv/wrong-lang">
+    Made with ❤ by <span class="text-blue-500">Tinnaphat Somsang</span>
+  </a>
 </div>
 {#if $modal}
   <Modal

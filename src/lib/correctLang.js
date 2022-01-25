@@ -12,7 +12,5 @@ export function correctLang(input, thmode, enmode) {
   let thLayout = (thmode === 'Manoonchai' ? thaiManoonchai : thmode === 'Pattachote' ? thaiPattachote : thaiKedmanee);
   let enLayout = (enmode === 'Colemak' ? engColemak : enmode === 'Dvorak' ? engDvorak : engQwerty);
   
-  console.log(input.split('').map(char => thLayout.indexOf(char) !== -1 ? enLayout[thLayout.indexOf(char)] : char).join(''))
-  
   return input.split('').map(char => thLayout.indexOf(char) !== -1 ? enLayout[thLayout.indexOf(char)] : char).join('')
 }
