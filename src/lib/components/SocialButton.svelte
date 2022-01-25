@@ -1,7 +1,7 @@
 <script>
     import { Facebook, Twitter } from 'svelte-share-buttons-component';
 
-    const url = 'https://wrong-lang.vvx.bar/';
+    const url = 'https://www.wrong-lang.click/';
     const title = 'สำหรับใครที่ชอบลืมเปลี่ยนภาษาเวลาพิมพ์ ใช้นี่สิ!';
 </script>
 
