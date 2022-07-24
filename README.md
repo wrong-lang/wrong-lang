@@ -1,3 +1,3 @@
-# Wrong-lang
+# Moved
 
- l;ylfu8iy[mjkol,k=bd=,i,8o.=h ;jv'c]j' 
+https://github.com/wrong-lang/WrongLang
